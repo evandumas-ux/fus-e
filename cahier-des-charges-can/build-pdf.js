@@ -9,6 +9,7 @@ const path = require('path');
   const browser = await chromium.launch();
   const page = await browser.newPage();
   await page.goto('file://' + path.resolve(input), { waitUntil: 'load' });
+  await page.evaluate(() => document.fonts.ready);
   await page.pdf({ path: output, preferCSSPageSize: true, printBackground: true, tagged: true });
   await browser.close();
 })();

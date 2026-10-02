@@ -2,14 +2,14 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<title>Cahier des charges allégé bus CAN IRIS</title>
+<title>Cahier des charges bus CAN IRIS</title>
 <style>
   @page {
     size: A4;
     margin: 16mm 18mm;
     @top-left { content: "STORK IV / IRIS"; font: bold 8.5pt Arial, sans-serif; color: #16324f; }
-    @top-right { content: "Cahier des charges allégé · bus CAN"; font: 8.5pt Arial, sans-serif; color: #44546a; }
-    @bottom-left { content: "IRIS-CDCA-CAN | v1.8 | 02/10/2026"; font: 8.5pt Arial, sans-serif; color: #44546a; }
+    @top-right { content: "Cahier des charges · bus CAN"; font: 8.5pt Arial, sans-serif; color: #44546a; }
+    @bottom-left { content: "IRIS-CDC-CAN | v1.8 | 02/10/2026"; font: 8.5pt Arial, sans-serif; color: #44546a; }
     @bottom-right { content: "page " counter(page) " / " counter(pages); font: 8.5pt Arial, sans-serif; color: #44546a; }
   }
   :root {
@@ -46,7 +46,6 @@
   .kicker b { color: var(--teal); }
   h1 { font-size: 19pt; line-height: 1.2; color: var(--navy); margin: 0 0 3px; }
   .sub { font-size: 10pt; line-height: 1.35; color: var(--muted); margin: 0; }
-  .meta { font-size: 8.5pt; color: var(--muted); margin: 7px 0 0; }
 
   h2 {
     font-size: 16pt;
@@ -56,7 +55,6 @@
     padding-bottom: 7px;
     border-bottom: 1px solid var(--teal);
   }
-  .meta + h2 { margin-top: 9px; }
   h3 {
     font-size: 12.5pt;
     line-height: 1.35;
@@ -94,18 +92,17 @@
   <img class="logo" src="assets/logo-icam.png" alt="Icam">
   <div class="titles">
     <div class="kicker"><b>STORK IV / IRIS </b>Integrated Rocket Integrity System</div>
-    <h1>Cahier des charges allégé</h1>
+    <h1>Cahier des charges</h1>
     <p class="sub"><b>Bus CAN</b> · analyse fonctionnelle, fonctions caractérisées et organisation de l'équipe</p>
   </div>
   <img class="patch" src="assets/patch-stork.png" alt="Patch STORK IV">
 </header>
-<p class="meta"><b>IRIS-CDCA-CAN</b> · version 1.8 du 02/10/2026 · E. Dumas, J. Hentsch, C. Jiménez Dumont · le module LoRa fait l'objet d'un cahier des charges allégé séparé.</p>
 
 <h2>1 Besoin et périmètre</h2>
 <p>IRIS est l'une des expériences embarquées de la fusée STORK IV. C'est un <b>bus CAN</b> : une liaison partagée qui relie trois cartes électroniques, appelées <b>nœuds</b>, et leur permet d'échanger des messages. Les nœuds sont répartis le long de la fusée : le nœud avant (dans l'ogive), le nœud principal (près du moteur) et le nœud empennage (près des ailerons). Ce type de liaison est très utilisé dans l'automobile, parce qu'il résiste bien aux parasites électriques.</p>
 <p><b>Besoin</b> : pendant le vol, les nœuds mesurent les efforts, les vibrations et les températures de la structure. Ils sont éloignés les uns des autres, mais doivent travailler ensemble : avoir la même heure, pour comparer leurs mesures ; se prévenir des événements du vol, comme le décollage ; et signaler leur état, pour vérifier avant le vol que tout fonctionne et comprendre après le vol ce qui s'est passé. IRIS leur permet de le faire.</p>
 <p><b>Périmètre</b> : le bus comprend le câble et ses connecteurs, les circuits qui relient chaque carte au câble et le programme qui gère le bus dans chaque nœud. Il transporte l'heure commune, les événements du vol, l'état de chaque nœud et des résumés des mesures. Ses trois <b>points d'entrée</b> sont, pour chaque message, une <b>donnée</b> (ce qu'il faut transmettre) et une <b>adresse</b> (le nom du message, qui indique aussi sa priorité), ainsi que l'<b>état du bus</b> (libre, occupé ou en erreur), dont il tient compte avant d'envoyer.</p>
-<p><b>Hors périmètre</b> : les mesures complètes (chaque nœud les garde dans sa propre mémoire), les capteurs, les mémoires, la radio LoRa et la station au sol, le système de guidage, le séquenceur du parachute et le moteur.</p>
+<p><b>Hors périmètre</b> : les mesures complètes (chaque nœud les garde dans sa propre mémoire), les capteurs, les mémoires, le système de guidage, le séquenceur du parachute et le moteur.</p>
 
 <h2>2 Schéma bloc fonctionnel</h2>
 <figure>

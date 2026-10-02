@@ -193,7 +193,7 @@
     <text x="350" y="264">câble</text>
     <text x="550" y="264">dans le nœud qui reçoit</text>
   </g>
-  <text x="350" y="280" text-anchor="middle" fill="#1b2430">Si un message est abîmé en route, il est rejeté et renvoyé : l'état du bus garde la trace de l'erreur.</text>
+  <text x="350" y="280" text-anchor="middle" fill="#1b2430">Si un message est corrompu en route, il est rejeté et renvoyé : l'état du bus garde la trace de l'erreur.</text>
 </svg>
 <figcaption>Figure 1 — En haut : chaque nœud envoie (en vert) et reçoit (en bleu) des messages de 8 octets en binaire (des 0 et des 1) ; au sol, on les lit en hexadécimal (16 chiffres de 0 à 9 et de A à F par message). En bas : le trajet d'un message, depuis les trois points d'entrée jusqu'au nœud qui le reçoit.</figcaption>
 </figure>
@@ -210,23 +210,22 @@
     <tr><td>Vitesse</td><td>Nombre de bits (des 0 et des 1) envoyés chaque seconde.</td><td>1 Mbit/s pour l'adresse, 5 Mbit/s pour le contenu</td><td class="flex">F1</td></tr>
     <tr><td>Bande passante</td><td>Capacité du bus : environ 20&nbsp;000 messages par seconde.</td><td>Moins de 50 % de la bande passante utilisée</td><td class="flex">F1</td></tr>
     <tr><td>Donnée transmise</td><td>Heure, événements, santé des nœuds et résumés des mesures.</td><td>8 octets par message</td><td class="flex">F0</td></tr>
-    <tr><td>Adresse</td><td>Nom du message, qui fixe aussi sa priorité.</td><td>Une adresse différente par message, sur 2&nbsp;048 possibles</td><td class="flex">F0</td></tr>
-    <tr><td>Intégrité</td><td>Un message abîmé n'est jamais utilisé ; un message perdu est repéré.</td><td>0 message abîmé utilisé ; messages numérotés</td><td class="flex">F1</td></tr>
+    <tr><td>Adresse</td><td>Nom du message, qui fixe aussi sa priorité.</td><td>Une adresse différente par message, sur 11 bits</td><td class="flex">F0</td></tr>
+    <tr><td>Intégrité</td><td>Un message corrompu n'est jamais utilisé ; un message perdu est repéré.</td><td>0 message corrompu utilisé ; 100 % des pertes repérées</td><td class="flex">F1</td></tr>
     <tr><td>État du bus</td><td>Chaque nœud signale ses erreurs.</td><td>État envoyé toutes les 1 s</td><td class="flex">F1</td></tr>
-    <tr><td>Reconnexion</td><td>Un nœud coupé du bus revient tout seul.</td><td>Automatique, en moins de 1 s</td><td class="flex">F1</td></tr>
-    <tr><td>Même heure</td><td>Les trois nœuds ont la même heure, pour comparer leurs mesures.</td><td>Écart entre nœuds ≤ 0,1 ms ; heure envoyée toutes les 1 s</td><td class="flex">F1</td></tr>
-    <tr><td>FC1 · Vibrations</td><td>Aucun câble ne se débranche en vol.</td><td>0 déconnexion à l'essai de secouage</td><td class="flex">F0</td></tr>
-    <tr><td>FC2 · Redondance</td><td>Chaque message part sur deux fils en miroir : un parasite touche les deux et s'annule. Un message abîmé est renvoyé.</td><td>Signal doublé sur 2 fils ; renvoi automatique</td><td class="flex">F1</td></tr>
+    <tr><td>Reconnexion</td><td>La reconnexion d'un nœud au bus est automatique après une coupure.</td><td>Automatique, en moins de 1 s</td><td class="flex">F1</td></tr>
+    <tr><td>Même heure</td><td>Les trois nœuds ont la même heure, pour comparer leurs mesures.</td><td>Écart entre nœuds ≤ 0,1 ms</td><td class="flex">F1</td></tr>
+    <tr><td>FC1 · Vibrations</td><td>Aucun câble ne se débranche en vol.</td><td>0 déconnexion des câbles due aux vibrations</td><td class="flex">F0</td></tr>
   </tbody>
   <tbody>
     <tr class="grp"><td colspan="4">FS1 · Permettre de tester le bus au sol avant le vol</td></tr>
-    <tr><td>Lecture au sol</td><td>Un ordinateur branché sur le bus (boîtier PCAN-USB FD) affiche les messages.</td><td>100 % des messages affichés en moins de 0,5 s</td><td class="flex">F1</td></tr>
+    <tr><td>Lecture au sol</td><td>Un ordinateur branché sur le bus affiche les messages.</td><td>100 % des messages affichés en moins de 0,5 s</td><td class="flex">F1</td></tr>
     <tr><td>FC3 · Branchement</td><td>Un connecteur ne se branche ni à l'envers ni au mauvais endroit.</td><td>0 inversion possible</td><td class="flex">F0</td></tr>
     <tr><td>FC4 · Commandes</td><td>Personne ne peut donner d'ordre au bus pendant le vol.</td><td>0 commande acceptée en vol</td><td class="flex">F0</td></tr>
   </tbody>
   <tbody>
     <tr class="grp"><td colspan="4">FS2 · Permettre d'exploiter les messages du bus après le vol</td></tr>
-    <tr><td>Log du bus</td><td>Le nœud principal garde un log de tous les messages du bus, relu après le vol.</td><td>100 % des messages enregistrés</td><td class="flex">F1</td></tr>
+    <tr><td>Log du bus</td><td>Un log de tous les messages du bus est gardé, puis relu après le vol.</td><td>100 % des messages enregistrés</td><td class="flex">F1</td></tr>
   </tbody>
 </table>
 
@@ -235,7 +234,7 @@
   <colgroup><col style="width:14%"><col style="width:18%"><col style="width:18%"><col style="width:22%"><col style="width:28%"></colgroup>
   <thead><tr><th>Message</th><th>Envoyé par (nœuds)</th><th>Reçu par (nœuds)</th><th>Quand</th><th>Contenu</th></tr></thead>
   <tbody>
-    <tr><td>Décollage</td><td>principal</td><td>avant, empennage</td><td>au décollage</td><td>heure du décollage (à 0,1 ms près)</td></tr>
+    <tr><td>Décollage</td><td>principal</td><td>avant, empennage</td><td>au décollage</td><td>heure du décollage (à 0,1 s près)</td></tr>
     <tr><td>Événement</td><td>avant, empennage</td><td>principal</td><td>dès qu'un nœud détecte un événement</td><td>type, numéro, heure (en ms) et valeur de l'événement</td></tr>
   </tbody>
 </table>
@@ -245,7 +244,7 @@
   <colgroup><col style="width:20%"><col style="width:18%"><col style="width:18%"><col style="width:8%"><col style="width:9%"><col style="width:27%"></colgroup>
   <thead><tr><th>Message</th><th>Envoyé par (nœuds)</th><th>Reçu par (nœuds)</th><th>Toutes les</th><th>Par seconde</th><th>Contenu</th></tr></thead>
   <tbody>
-    <tr><td>Heure commune (×2)</td><td>principal</td><td>avant, empennage</td><td class="c">1 s</td><td class="c">2</td><td>heure du principal (à 0,1 ms près)</td></tr>
+    <tr><td>Heure commune (×2)</td><td>principal</td><td>avant, empennage</td><td class="c">1 s</td><td class="c">2</td><td>heure du principal (à 0,1 s près)</td></tr>
     <tr><td>Santé du principal</td><td>principal</td><td>avant, empennage</td><td class="c">1 s</td><td class="c">1</td><td>erreurs du bus</td></tr>
     <tr><td>Santé des autres nœuds</td><td>avant, empennage</td><td>principal</td><td class="c">1 s</td><td class="c">2</td><td>mêmes informations</td></tr>
   </tbody>

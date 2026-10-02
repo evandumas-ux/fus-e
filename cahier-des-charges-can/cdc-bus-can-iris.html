@@ -103,8 +103,9 @@
 
 <h2>1 Besoin et périmètre</h2>
 <p>IRIS est l'expérience embarquée de la fusée STORK IV. Elle mesure les efforts, les vibrations et les températures de la structure pendant le vol, grâce à trois cartes électroniques appelées <b>nœuds</b> : le nœud avant (dans l'ogive), le nœud principal (près du moteur) et le nœud empennage (près des ailerons).</p>
-<p>Le <b>bus CAN</b> est le câble partagé qui relie ces trois nœuds et leur permet d'échanger des messages. C'est un type de liaison très utilisé dans l'automobile, parce qu'il résiste bien aux parasites électriques. Il transporte l'heure commune, les événements du vol (comme le décollage), l'état de santé de chaque nœud et des résumés des mesures. Les mesures complètes ne passent pas par le bus : chaque nœud les garde dans sa propre mémoire.</p>
-<p><b>Points d'entrée</b> : pour chaque message, le bus reçoit une <b>donnée</b> (ce qu'il faut transmettre) et une <b>adresse</b> (le nom du message, qui indique aussi sa priorité) ; il tient compte de l'<b>état du bus</b> (libre, occupé ou en erreur) avant d'envoyer. <b>Hors périmètre</b> : capteurs, mémoires, radio LoRa et station au sol, système de guidage, séquenceur du parachute, moteur.</p>
+<p><b>Besoin</b> : les trois nœuds sont éloignés les uns des autres, mais doivent travailler ensemble. Ils doivent avoir la même heure, pour comparer leurs mesures ; se prévenir des événements du vol, comme le décollage ; et signaler leur état, pour vérifier avant le vol que tout fonctionne et comprendre après le vol ce qui s'est passé. Le <b>bus CAN</b> répond à ce besoin : c'est la liaison partagée qui relie les trois nœuds et leur permet d'échanger des messages. Ce type de liaison est très utilisé dans l'automobile, parce qu'il résiste bien aux parasites électriques.</p>
+<p><b>Périmètre</b> : le bus comprend le câble et ses connecteurs, les circuits qui relient chaque carte au câble et le programme qui gère le bus dans chaque nœud. Il transporte l'heure commune, les événements du vol, l'état de chaque nœud et des résumés des mesures. Ses trois <b>points d'entrée</b> sont, pour chaque message, une <b>donnée</b> (ce qu'il faut transmettre) et une <b>adresse</b> (le nom du message, qui indique aussi sa priorité), ainsi que l'<b>état du bus</b> (libre, occupé ou en erreur), dont il tient compte avant d'envoyer.</p>
+<p><b>Hors périmètre</b> : les mesures complètes (chaque nœud les garde dans sa propre mémoire), les capteurs, les mémoires, la radio LoRa et la station au sol, le système de guidage, le séquenceur du parachute et le moteur.</p>
 
 <h2>2 Schéma bloc fonctionnel</h2>
 <figure>
@@ -199,10 +200,10 @@
 <figcaption>Figure 1 — En haut : chaque nœud envoie (en vert) et reçoit (en bleu) des messages de 8 octets en binaire (des 0 et des 1) ; au sol, on les lit en hexadécimal (16 chiffres de 0 à 9 et de A à F par message). En bas : le trajet d'un message, depuis les trois points d'entrée jusqu'au nœud qui le reçoit.</figcaption>
 </figure>
 
-<h2>3 Fonctions et critères</h2>
+<h2 class="page-break">3 Fonctions et critères</h2>
 <p>FP = fonction principale, FS = fonction secondaire, FC = fonction contrainte (rangée avec la fonction qu'elle concerne). Flexibilité : <b>F0</b> non négociable, <b>F1</b> peu négociable, <b>F2</b> négociable.</p>
 
-<h3 class="page-break">Tableau 1 — Fonctions, critères, niveaux et flexibilité</h3>
+<h3>Tableau 1 — Fonctions, critères, niveaux et flexibilité</h3>
 <table class="t1">
   <colgroup><col style="width:18%"><col style="width:48%"><col style="width:27%"><col style="width:7%"></colgroup>
   <thead><tr><th>Critère</th><th>Ce que ça veut dire</th><th>Niveau attendu</th><th>Flex.</th></tr></thead>

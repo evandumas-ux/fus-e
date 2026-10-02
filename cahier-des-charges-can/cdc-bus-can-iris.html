@@ -85,6 +85,7 @@
 
   ul { margin: 0; padding-left: 16pt; }
   li { margin-bottom: 2px; }
+  sup { line-height: 0; }
 </style>
 </head>
 <body>
@@ -254,15 +255,15 @@
 <h2>4 Gestion de projet</h2>
 <h3>Organisation de l'équipe</h3>
 <table class="team">
-  <colgroup><col style="width:20%"><col style="width:55%"><col style="width:25%"></colgroup>
-  <thead><tr><th>Membre</th><th>Rôle sur le bus CAN</th><th>Contrôle croisé</th></tr></thead>
+  <colgroup><col style="width:25%"><col style="width:75%"></colgroup>
+  <thead><tr><th>Membre</th><th>Rôle sur le bus CAN</th></tr></thead>
   <tbody>
-    <tr><td class="who">Evan Dumas</td><td>Besoin et architecture du bus ; outils pour lire le bus depuis le sol ; câblage avec Julien ; essais complets</td><td>Ne valide jamais seul une décision de sécurité</td></tr>
-    <tr><td class="who">Julien Hentsch</td><td>Programme du bus dans les 3 nœuds ; catalogue des messages (adresses, périodes) ; essais du bus ; câblage avec Evan</td><td>Relit les schémas et les cartes</td></tr>
-    <tr><td class="who">Clémentine Jiménez Dumont</td><td>Partie électrique du bus : circuits d'interface, résistances, protections, connecteurs, cartes ; planning et revues</td><td>Toute alimentation ou isolation est relue par un 2<sup>e</sup> membre</td></tr>
+    <tr><td class="who">Evan Dumas</td><td>Besoin et architecture du bus ; outils pour lire le bus depuis le sol ; câblage avec Julien ; essais complets</td></tr>
+    <tr><td class="who">Julien Hentsch</td><td>Programme du bus dans les 3 nœuds ; catalogue des messages (adresses, périodes) ; essais du bus ; câblage avec Evan</td></tr>
+    <tr><td class="who">Clémentine Jiménez Dumont</td><td>Partie électrique du bus : circuits d'interface, résistances, protections, connecteurs, cartes ; planning et revues</td></tr>
   </tbody>
 </table>
-<p class="note">Travail réparti à parts égales : environ 235 h par membre. Toute opération à risque (isolation, alimentation, essais, vol) est validée par un second membre.</p>
+<p class="note">Travail réparti à parts égales : environ 235 h par membre.</p>
 
 <h3>Planning simplifié</h3>
 <figure>
@@ -366,7 +367,7 @@
   <li><b>Commencer par ce qui bloque le reste</b> : l'architecture, puis les schémas des cartes.</li>
   <li><b>Ne pas attendre les cartes définitives</b> : le programme du bus est testé sur des cartes d'essai.</li>
   <li><b>Faire moins de travail</b> : une seule carte, un seul programme et un seul catalogue pour les trois nœuds.</li>
-  <li><b>Une revue à chaque étape</b>, et commander tôt les composants difficiles à trouver.</li>
+  <li><b>Une revue à chaque étape</b> par un 2<sup>e</sup> membre, et commander tôt les composants difficiles à trouver.</li>
 </ul>
 
 </body>
